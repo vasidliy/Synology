@@ -1,0 +1,162 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+*.swo
+*~
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Temporary files and directories
+*.tmp
+*.temp
+*.log
+*.bak
+*.backup
+*.old
+*.pid
+*.pid.lock
+
+# IDE and editor files
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.vscode/*.tmp
+.vscode/*.log
+.history
+
+# JetBrains IDEs (PyCharm, IntelliJ, etc.)
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-*
+sftp-config.json
+sftp-settings.json
+
+# Vim
+.*.swp
+*.swp
+*.swo
+*.un~
+.session.vim
+netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Log files from script execution
+update_clamav.log
+update.log
+*.log
+
+# Synology-specific temporary files
+# These are created by the script but should not be committed
+Temp/
+temp/
+downloads/
+
+# Compiled files and binaries
+*.pyc
+__pycache__/
+*.class
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Package files
+*.tar.gz
+*.zip
+*.7z
+*.rar
+
+# Environment and configuration files with secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+config.json
+secrets.json
+credentials.json
+
+# Testing files
+coverage/
+*.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.tox/
+
+# Documentation build files
+docs/_build/
+docs/source/_build/
+_build/
+
+# Package management
+node_modules/
+vendor/
+bower_components/
+*.gem
+*.egg
+*.egg-info/
+
+# OS metadata
+Desktop.ini
+[Pp]ackages/
+[Pp]ublished/
+[Ll]ogs/
+[Tt]emp/
+
+# Backup files
+*_backup
+backup/
+*.back
+
+# Project-specific ignores
+# Ignore any test or sample directories
+test/
+tests/
+samples/
+examples/
+
+# Ignore large files
+*.iso
+*.vmdk
+*.ova
+*.ovf
+
+# Ignore macOS resource fork directories
+__MACOSX/
+
+# Ignore any personal notes or scratch files
+scratch.md
+todo.md
+notes.md
+personal/
+private/
+tmp/
+temp/
+
+# Ignore any upload or download directories
+upload/
+download/
