@@ -148,22 +148,6 @@ This operation runs **after** processing all directories but before printing the
 - Deletion failures (e.g., permission denied) are recorded per file and included in the report; the script continues.
 - Temporary files are cleaned up on exit (`trap` on `EXIT`).
 
-## Customisation
-
-- **Adding new junk patterns**: Edit the `JUNK_PATTERNS` array inside the script, following the same format (`-name 'pattern'`).
-- **Changing default log directory**: Modify the `SCRIPT_DIR` assignment in the script, or always supply `--log-file`.
-- **Running from cron**: It is safe to schedule the script; ensure you use absolute paths and set `--mode delete` if you intend automatic removal. Example cron entry:
-  ```
-  0 3 * * 0 /volume1/scripts/cleanup_junk/cleanup_junk.sh --mode delete --exclude-system-dirs --cleanup-logs 90 /volume1 /volume2
-  ```
-
-## Notes for Synology NAS
-
-- The `stat` command is available in DSM (BusyBox version).
-- `numfmt` may not be present on older DSM versions; the script gracefully falls back to raw byte sizes.
-- If you run the script via Task Scheduler, you may need to use the full path to the script and explicitly set environment variables (e.g., `PATH`).
-- Default permissions on shared folders might require execution as `root` or using `sudo` for delete operations.
-
 ## License
 
 This script is provided as-is without any warranty. You are free to use, modify, and distribute it.
