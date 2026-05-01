@@ -48,7 +48,7 @@ It supports two modes of operation: **dry-run** (test) and **delete**, and provi
 | `--log-level <LEVEL>`   | Log verbosity: `INFO` (default) or `DEBUG`.                                                                   |
 | `--exclude-dir <DIR>`   | Exclude a directory (can be specified multiple times). Both absolute and relative (to target) paths accepted.   |
 | `--exclude-system-dirs` | Auto-detect all `@`-prefixed directories in the root of each volume and exclude them from scanning.            |
-| `--cleanup-logs [DAYS]` | Delete log files older than `DAYS` days (default: 180) in the log directory.                                   |
+| `--cleanup-logs [DAYS]` | Delete log files matching `junk_cleanup_*.log` older than DAYS days. If DAYS is `0`, removes all old logs except the one currently being written. Default: 180. |
 | `-h, --help`            | Show the help message and exit.                                                                               |
 
 At least one target directory must be provided.
@@ -74,6 +74,12 @@ At least one target directory must be provided.
 
 # Dry-run with DEBUG logs written to a custom file
 /volume1/scripts/cleanup_junk/cleanup_junk.sh --log-level DEBUG --log-file /tmp/debug.log /volume1/music
+
+# Delete junk files and remove ALL old logs except the current one
+/volume1/scripts/cleanup_junk/cleanup_junk.sh --mode delete --cleanup-logs 0 /volume1/
+
+# Delete junk files and remove logs older than 30 days (keep last month)
+/volume1/scripts/cleanup_junk/cleanup_junk.sh --mode delete --cleanup-logs 30 /volume1/
 ```
 
 ## File Patterns (Default)

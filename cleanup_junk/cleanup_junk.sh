@@ -96,14 +96,31 @@ perform_log_cleanup() {
     log_dir=$(dirname "$LOG_FILE")
     log INFO "Log cleanup: removing log files older than $CLEANUP_DAYS days in $log_dir"
     local deleted_count=0
-    while IFS= read -r -d '' old_log; do
-        if rm -f -- "$old_log" 2>/dev/null; then
-            log INFO "Removed old log: $old_log"
-            ((deleted_count++))
-        else
-            log INFO "Failed to remove old log: $old_log"
-        fi
-    done < <(find "$log_dir" -maxdepth 1 -type f -name "junk_cleanup_*.log" -mtime +"$CLEANUP_DAYS" -print0 2>/dev/null)
+
+    if [[ "$CLEANUP_DAYS" -eq 0 ]]; then
+        # Special case: delete all matching logs except the current one
+        while IFS= read -r -d '' old_log; do
+            if [[ "$old_log" != "$LOG_FILE" ]]; then
+                if rm -f -- "$old_log" 2>/dev/null; then
+                    log INFO "Removed old log: $old_log"
+                    ((deleted_count++))
+                else
+                    log INFO "Failed to remove old log: $old_log"
+                fi
+            fi
+        done < <(find "$log_dir" -maxdepth 1 -type f -name "junk_cleanup_*.log" -print0 2>/dev/null)
+    else
+        # Normal case: delete files older than CLEANUP_DAYS days
+        while IFS= read -r -d '' old_log; do
+            if rm -f -- "$old_log" 2>/dev/null; then
+                log INFO "Removed old log: $old_log"
+                ((deleted_count++))
+            else
+                log INFO "Failed to remove old log: $old_log"
+            fi
+        done < <(find "$log_dir" -maxdepth 1 -type f -name "junk_cleanup_*.log" -mtime +"$CLEANUP_DAYS" -print0 2>/dev/null)
+    fi
+
     log INFO "Log cleanup completed: $deleted_count file(s) removed."
 }
 
